@@ -1,0 +1,17 @@
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.csproj.AssemblyReference.cache
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.AssemblyInfoInputs.cache
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.AssemblyInfo.cs
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.csproj.CoreCompileInputs.cache
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Persistence.deps.json
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Persistence.dll
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Persistence.pdb
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Application.dll
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Domain.dll
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Application.pdb
+D:\kayra export\Infrastructure\Persistence\bin\Debug\net6.0\Domain.pdb
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.csproj.CopyComplete
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.dll
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\refint\Persistence.dll
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\Persistence.pdb
+D:\kayra export\Infrastructure\Persistence\obj\Debug\net6.0\ref\Persistence.dll
