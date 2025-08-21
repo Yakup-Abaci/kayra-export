@@ -11,7 +11,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="Google.Apis.Auth" Version="1.70.0" />
-    <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.36" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
@@ -22,10 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\Users\AddUser\" />
     <Folder Include="Features\Commands\Users\DeleteUser\" />
     <Folder Include="Features\Commands\Users\UpdateUser\" />
-    <Folder Include="Features\Queries\Users\GetAllUsers\" />
     <Folder Include="Features\Queries\Users\GetByIdUser\" />
   </ItemGroup>
 

@@ -16,7 +16,6 @@ namespace Application.Abstractions.Services.IProductService
     public interface IProductService
     {
         Task<AddProductResponse> AddProductAsync(AddProductRequest request);
-
         Task<GetAllProductResponse> GetAllProductAsync();
         Task<GetByIdProductResponse> GetByIdProductAsync(GetByIdProductRequest request);
         Task<UpdateProductResponse> UpdateProductAsync(UpdateProductRequest request);

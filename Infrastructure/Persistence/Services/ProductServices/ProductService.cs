@@ -17,19 +17,17 @@ using Application.DTOs.DeleteProduct;
 
 namespace Persistence.Services.ProductServices
 {
-    public class ProductService : IProductService
+    public class ProductService : Service<Product> , IProductService
     {
-        private readonly KayraDbContext _dbContext;
-
-        public ProductService(KayraDbContext dbContext)
+        public ProductService(KayraDbContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
         public async Task<AddProductResponse> AddProductAsync(AddProductRequest request)
         {
+            
 
-            EntityEntry result = await _dbContext.Products.AddAsync(new()
+            EntityEntry result = await Table.AddAsync(new()
             {
                 Ad = request.Ad,
                 Adet = request.Adet,
@@ -39,7 +37,7 @@ namespace Persistence.Services.ProductServices
             {
                 try
                 {
-                    await _dbContext.SaveChangesAsync();
+                    await SaveChangesAsync();
                     return AddProductResponse.Succedeed(isSuccedeed: true,Message:"Ekleme İşlemi Başarılı");
                 }
                 catch (DbUpdateException ex)
@@ -65,13 +63,13 @@ namespace Persistence.Services.ProductServices
             });
             if (result.isFind == true)
             {
-                EntityEntry entity = _dbContext.Products.Remove(result.product);
+                EntityEntry entity = Table.Remove(result.product);
 
                 if (entity.State == EntityState.Deleted)
                 {
                     try
                     {
-                        await _dbContext.SaveChangesAsync();
+                        await SaveChangesAsync();
                         return new() 
                         { 
                             isSuccedeed = true,
@@ -111,7 +109,7 @@ namespace Persistence.Services.ProductServices
 
         public async Task<GetAllProductResponse> GetAllProductAsync()
         {
-            List<Product> products = await _dbContext.Products.ToListAsync();
+            List<Product> products = await Table.ToListAsync();
 
             return new GetAllProductResponse()
             {
@@ -124,8 +122,7 @@ namespace Persistence.Services.ProductServices
 
         public async Task<GetByIdProductResponse> GetByIdProductAsync(GetByIdProductRequest request)
         {
-            //await _dbContext.Products.FindAsync(request.Id);
-            List<Product> produts = await _dbContext.Products.ToListAsync();
+            List<Product> produts = await Table.ToListAsync();
             Product? product = produts.FirstOrDefault(data => data.Id.Equals(request.Id));
             if (product == null)
             {
@@ -140,9 +137,8 @@ namespace Persistence.Services.ProductServices
 
         public async Task<UpdateProductResponse> UpdateProductAsync(UpdateProductRequest request)
         {
-            //Product product = await _dbContext.Products.FindAsync(request.Id);
 
-            EntityEntry<Product> entity = _dbContext.Products.Update(new()
+            EntityEntry<Product> entity = Table.Update(new()
             {
                 Id = request.Id,
                 Ad = request.Ad,
@@ -152,8 +148,8 @@ namespace Persistence.Services.ProductServices
 
             try
             {
-                await _dbContext.SaveChangesAsync();
-                Product? product = _dbContext.Products.FirstOrDefault(data => data.Id.Equals(request.Id));
+                await SaveChangesAsync();
+                Product? product = Table.FirstOrDefault(data => data.Id.Equals(request.Id));
                 return UpdateProductResponse.Succedeed(isSuccedeed: true, product: product);
             }
             catch (DbUpdateException ex)
