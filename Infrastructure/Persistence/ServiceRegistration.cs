@@ -1,10 +1,13 @@
-﻿using Application.Abstractions.Services.IProductService;
+﻿using Application.Abstractions.Services.IAuthenticationService;
+using Application.Abstractions.Services.ICacheService;
+using Application.Abstractions.Services.IProductService;
 using Application.Abstractions.Services.IUserService;
 using Domain.Entities.User.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Services;
+using Persistence.Services.AuthenticationService;
 using Persistence.Services.ProductServices;
 using Persistence.Services.UserService;
 using System;
@@ -29,6 +32,7 @@ namespace Persistence
             }).AddEntityFrameworkStores<KayraDbContext>();
             service.AddScoped<IProductService,ProductService>();
             service.AddScoped<IUserService, UserService>();
+            service.AddScoped<ILoginUserService, LoginUserService>();
         }
         
     }

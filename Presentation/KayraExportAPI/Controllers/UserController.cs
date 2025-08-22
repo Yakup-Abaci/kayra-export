@@ -27,13 +27,7 @@ namespace KayraExportAPI.Controllers
             return Ok(response.Users);
         }
 
-        [HttpGet("{id}")]
-        public string GetByIdUser(int id)
-        {
-            return "value";
-        }
-
-        [HttpPost]
+        /*[HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] AddUserCommandRequest request)
         {
             AddUserCommandResponse response = await _mediator.Send(request);
@@ -43,16 +37,6 @@ namespace KayraExportAPI.Controllers
                 return Ok(response.token);
             }
             return BadRequest(response.Message);
-        }
-
-        [HttpPut("{id}")]
-        public void UpdateUser(int id, [FromBody] string value)
-        {
-        }
-
-        [HttpDelete("{id}")]
-        public void DeleteUser(int id)
-        {
-        }
+        }*/
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Application.Abstractions.Services.IUserService;
-using Application.Abstractions.Services.TokenService;
+using Application.Abstractions.Services.ITokenService;
 using Application.DTOs.AddUser;
 using Application.DTOs.GetAllUser;
 using Application.DTOs.Token;

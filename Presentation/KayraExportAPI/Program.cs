@@ -5,12 +5,13 @@ using Application;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Serilog;
+using Serilog.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddPersistenceServices();
-builder.Services.AddInfrastructureServices();
+builder.Services.AddInfrastructureServices(builder.Configuration["ConnectionStrings:Redis"]);
 builder.Services.AddApplicationServices();
 
 // Add services to the container.
@@ -19,6 +20,12 @@ builder.Services.AddCors(option => option.AddDefaultPolicy(
     AllowAnyMethod().AllowAnyHeader()
     ));
 
+Logger log = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt")
+    .WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("sqlConnection"),"logs",autoCreateSqlTable:true)
+    .CreateLogger();
+builder.Host.UseSerilog(log);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

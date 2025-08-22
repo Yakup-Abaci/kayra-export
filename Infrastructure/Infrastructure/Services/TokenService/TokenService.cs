@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.Services.TokenService;
+﻿using Application.Abstractions.Services.ITokenService;
 using Application.DTOs.Token;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

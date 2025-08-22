@@ -14,13 +14,18 @@ using Domain.Entities.Product;
 using Application.DTOs.GetByIdProduct;
 using Application.DTOs.UpdateProduct;
 using Application.DTOs.DeleteProduct;
+using System.Runtime.CompilerServices;
+using Application.Abstractions.Services.ICacheService;
 
 namespace Persistence.Services.ProductServices
 {
     public class ProductService : Service<Product> , IProductService
     {
-        public ProductService(KayraDbContext dbContext) : base(dbContext)
+        private readonly ICacheService _cacheService;
+        private const string CacheKey = "Products";
+        public ProductService(KayraDbContext dbContext, ICacheService cacheService) : base(dbContext)
         {
+            _cacheService = cacheService;
         }
 
         public async Task<AddProductResponse> AddProductAsync(AddProductRequest request)
@@ -38,6 +43,7 @@ namespace Persistence.Services.ProductServices
                 try
                 {
                     await SaveChangesAsync();
+                    await _cacheService.RemoveAsync(CacheKey); // cache invalidation
                     return AddProductResponse.Succedeed(isSuccedeed: true,Message:"Ekleme İşlemi Başarılı");
                 }
                 catch (DbUpdateException ex)
@@ -70,6 +76,7 @@ namespace Persistence.Services.ProductServices
                     try
                     {
                         await SaveChangesAsync();
+                        await _cacheService.RemoveAsync(CacheKey);
                         return new() 
                         { 
                             isSuccedeed = true,
@@ -109,7 +116,12 @@ namespace Persistence.Services.ProductServices
 
         public async Task<GetAllProductResponse> GetAllProductAsync()
         {
+            var cached = await _cacheService.GetAsync<List<Product>>(CacheKey);
+            if (cached != null) return new(){ products = cached };
+            
             List<Product> products = await Table.ToListAsync();
+
+            await _cacheService.SetAsync(CacheKey, products, TimeSpan.FromMinutes(10));
 
             return new GetAllProductResponse()
             {
@@ -119,7 +131,6 @@ namespace Persistence.Services.ProductServices
 
 
         }
-
         public async Task<GetByIdProductResponse> GetByIdProductAsync(GetByIdProductRequest request)
         {
             List<Product> produts = await Table.ToListAsync();
@@ -149,6 +160,7 @@ namespace Persistence.Services.ProductServices
             try
             {
                 await SaveChangesAsync();
+                await _cacheService.RemoveAsync(CacheKey);
                 Product? product = Table.FirstOrDefault(data => data.Id.Equals(request.Id));
                 return UpdateProductResponse.Succedeed(isSuccedeed: true, product: product);
             }
