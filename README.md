@@ -1,4 +1,4 @@
-### 2. Case1 Çalıştırma
+### Case1 Çalıştırma
 cd KayraExportAPI
 dotnet run
 ### PI çalıştığında şu adresten test edebilirsiniz:
