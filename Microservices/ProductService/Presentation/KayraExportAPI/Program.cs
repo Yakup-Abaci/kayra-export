@@ -10,7 +10,7 @@ using Serilog.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddPersistenceServices();
+builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration["ConnectionStrings:Redis"]);
 builder.Services.AddApplicationServices();
 
@@ -19,36 +19,12 @@ builder.Services.AddCors(option => option.AddDefaultPolicy(
     policy => policy.WithOrigins("http://localhost:7022", "http://localhost:5051").
     AllowAnyMethod().AllowAnyHeader()
     ));
-
-Logger log = new LoggerConfiguration()
-    .WriteTo.Console()
-    .WriteTo.File("logs/log.txt")
-    .WriteTo.MSSqlServer(builder.Configuration.GetConnectionString("sqlConnection"),"logs",autoCreateSqlTable:true)
-    .CreateLogger();
-builder.Host.UseSerilog(log);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer("Admin", opt =>
-    {
-        opt.TokenValidationParameters = new()
-        {
-            ValidateAudience = true,// oluþturulacak token deðerinin kimlerin kullanacaðýný belirler. izim web sayfasýnýn adresi
-            ValidateIssuer = true, //tokeinin kimin daðýttýýný ifade eder. bu api nin adresi
-            ValidateLifetime = true, // süresi
-            ValidateIssuerSigningKey = true, // tokenin bize ait olup olamdýðýný kontrol eder
-
-            ValidAudience = builder.Configuration["Token:Audience"],
-            ValidIssuer = builder.Configuration["Token:Issuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Token:SecurityKey"])),
-            LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
-
-
-        };
-    }
-);
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen();
+/*builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "My API", Version = "v1" });
 
@@ -78,16 +54,17 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
-});
+});*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+/*if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-
+}*/
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthentication();

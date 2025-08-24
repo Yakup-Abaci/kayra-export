@@ -21,10 +21,4 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Commands\Users\DeleteUser\" />
-    <Folder Include="Features\Commands\Users\UpdateUser\" />
-    <Folder Include="Features\Queries\Users\GetByIdUser\" />
-  </ItemGroup>
-
 </Project>

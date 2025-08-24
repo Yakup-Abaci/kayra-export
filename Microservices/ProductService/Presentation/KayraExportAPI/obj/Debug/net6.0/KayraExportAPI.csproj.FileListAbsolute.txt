@@ -342,7 +342,6 @@ D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Deb
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.AssemblyInfoInputs.cache
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.AssemblyInfo.cs
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.csproj.CoreCompileInputs.cache
-D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.MvcApplicationPartsAssemblyInfo.cs
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.MvcApplicationPartsAssemblyInfo.cache
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\staticwebassets\msbuild.KayraExportAPI.Microsoft.AspNetCore.StaticWebAssets.props
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.KayraExportAPI.props
@@ -358,3 +357,4 @@ D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Deb
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.pdb
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.genruntimeconfig.cache
 D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\ref\KayraExportAPI.dll
+D:\kayra export\Microservices\ProductService\Presentation\KayraExportAPI\obj\Debug\net6.0\KayraExportAPI.MvcApplicationPartsAssemblyInfo.cs

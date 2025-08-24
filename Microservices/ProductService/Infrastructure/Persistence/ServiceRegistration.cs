@@ -1,15 +1,10 @@
-﻿using Application.Abstractions.Services.IAuthenticationService;
-using Application.Abstractions.Services.ICacheService;
-using Application.Abstractions.Services.IProductService;
-using Application.Abstractions.Services.IUserService;
-using Domain.Entities.User.Identity;
+﻿using Application.Abstractions.Services.IProductService;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Services;
-using Persistence.Services.AuthenticationService;
 using Persistence.Services.ProductServices;
-using Persistence.Services.UserService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +15,13 @@ namespace Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddPersistenceServices(this IServiceCollection service)
+        public static void AddPersistenceServices(this IServiceCollection service, IConfiguration configuration)
         {
-            service.AddDbContext<KayraDbContext>(opt => opt.UseSqlServer(Configuration.ConnectionString));
-            service.AddIdentity<AppUser, AppRole>(opt =>
-            {
-                opt.Password.RequiredLength = 3;
-                opt.Password.RequireDigit = false;
-                opt.Password.RequireUppercase = false;
-                opt.Password.RequireNonAlphanumeric = false;
-            }).AddEntityFrameworkStores<KayraDbContext>();
+            var connectionString = configuration.GetConnectionString("sqlConnection");
+            service.AddDbContext<KayraDbContext>(options =>
+                options.UseSqlServer(connectionString));
             service.AddScoped<IProductService,ProductService>();
-            service.AddScoped<IUserService, UserService>();
-            service.AddScoped<ILoginUserService, LoginUserService>();
+           
         }
         
     }
